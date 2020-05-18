@@ -1,0 +1,33 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<body>
+<div class="card">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" />
+  <h1 class="site-title">PokeStat</h1>
+  <p class="subtitle">Compare your Pokemon Stats</p>
+  <a href="/dashapppkmn/" class="dash-link">
+    <span>PokeStat</span>
+    <i class="fas fa-arrow-right"></i>
+  </a>
+</div>
+<div class="card">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" />
+  <h1 class="site-title">Explore Fortnite Stats</h1>
+  <p class="subtitle">Take a look to Data of many players Sober or High</p>
+  <a href="/fortnite/" class="dash-link">
+    <span>Fortnite 80 Players Stats</span>
+    <i class="fas fa-arrow-right"></i>
+  </a>
+</div>
+<div class="card">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" />
+  <h1 class="site-title">Explore LoL 2019 World Cup Stats</h1>
+  <p class="subtitle">Take a look to results , used champs and my thing to the LoL 2019 WC</p>
+  <a href="/lol/" class="dash-link">
+    <span>Embdedded Plotly Dash</span>
+    <i class="fas fa-arrow-right"></i>
+  </a>
+</div>
+</body>
+{% endblock %}
