@@ -17,7 +17,7 @@ engine = create_engine('mysql+pymysql://root@localhost/gamedata')
 
 
 dateparse = lambda x: pd.datetime.strptime(x, '%d %B %Y')
-df = pd.read_excel('data/rocket-league/camera_settings.xls', sep=",", parse_dates=['Last_Update'])
+df = pd.read_excel('data/rocket-league/camera_settings.xls', sep=",", parse_dates=['Last_Update'],dateparser=dateparse)
 
 print(df)
 

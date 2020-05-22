@@ -16,7 +16,7 @@ def create_dashboard(server):
                          )
 
 
-    db = pymysql.connect("localhost", "root", "password", "gamedata")
+    db = pymysql.connect("localhost", "root", "", "gamedata")
     sql_query_sober = pd.read_sql_query("SELECT * FROM fortnite WHERE mental = 'sober'", db)
     df_sober = pd.DataFrame(sql_query_sober)
     sql_query_high = pd.read_sql_query("SELECT * FROM fortnite WHERE mental = 'high'", db)

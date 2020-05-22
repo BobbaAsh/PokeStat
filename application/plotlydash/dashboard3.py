@@ -23,7 +23,7 @@ def create_dashboard(server):
                          )
 
 
-    db = pymysql.connect("localhost", "root", "password", "gamedata")
+    db = pymysql.connect("localhost", "root", "", "gamedata")
     sql_query = pd.read_sql_query("SELECT * FROM pkmn", db)
     df = pd.DataFrame(sql_query)
 
