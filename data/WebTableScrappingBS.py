@@ -46,5 +46,5 @@ df2["Player"] = new_col
 
 print(df2)
 
-df2.to_excel('data/rocket-league/camera_settings.xl', index=False)
+df2.to_excel('data/rocket-league/camera_settings_2.xls', index=False)
 
