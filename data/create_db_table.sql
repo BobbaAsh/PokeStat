@@ -73,3 +73,12 @@ Player VARCHAR(100)
 ,A_Stiffness FLOAT(10)
 )
 ;
+
+DROP TABLE IF EXISTS rocket_cam_settings_desc_6;
+CREATE TABLE rocket_cam_settings_desc_6(
+    FOV_DESC INT(5)
+    ,Distance_DESC INT(5)
+    ,Height_DESC INT(5)
+    ,Angle_DESC INT(5)
+)
+;
