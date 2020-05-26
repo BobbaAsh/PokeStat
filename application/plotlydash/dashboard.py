@@ -8,7 +8,7 @@ from .layout import html_layout
 import pymysql
 import plotly.graph_objects as go
 
-db = pymysql.connect("localhost", "root", "password", "gamedata")
+db = pymysql.connect("localhost", "root", "", "gamedata")
 
 def create_dashboard(server):
     dash_app = dash.Dash(server=server,
