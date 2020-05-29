@@ -14,9 +14,6 @@ def create_app():
         from application.plotlydash.dashboard2 import create_dashboard
         app = create_dashboard(app)
         
-        from application.plotlydash.dashboard3 import create_dashboard
-        app = create_dashboard(app)
-
         if app.config['FLASK_ENV'] == 'development':
             from application.assets import compile_assets
             compile_assets(app)

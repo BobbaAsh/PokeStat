@@ -12,3 +12,7 @@ def home():
 
     
    
+@app.route('/rocket/')
+def rocket():
+    return render_template('rocket.jinja2',
+                           template='home-template')

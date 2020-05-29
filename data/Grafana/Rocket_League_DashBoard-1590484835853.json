@@ -1,0 +1,1216 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:190",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 4,
+  "links": [],
+  "panels": [
+    {
+      "columns": [],
+      "datasource": "gamedata",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 19,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:1496",
+          "alias": "FOV",
+          "align": "center",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "mappingType": 1,
+          "pattern": "time",
+          "preserveFormat": false,
+          "type": "hidden"
+        },
+        {
+          "$$hashKey": "object:2507",
+          "alias": "FOV",
+          "align": "center",
+          "colorMode": "value",
+          "colors": [
+            "#B877D9",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "FOV_DESC",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:1497",
+          "alias": "Distance",
+          "align": "center",
+          "colorMode": "value",
+          "colors": [
+            "#FF7383",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 0,
+          "pattern": "Distance_DESC",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:2518",
+          "alias": "Height",
+          "align": "center",
+          "colorMode": "value",
+          "colors": [
+            "#8AB8FF",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Height_DESC",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:2529",
+          "alias": "Angle",
+          "align": "center",
+          "colorMode": "value",
+          "colors": [
+            "#FA6400",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Angle_DESC",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  FOV_DESC AS \"time\",\n  FOV_DESC,\n  Distance_DESC,\n  Height_DESC,\n  Angle_DESC\nFROM rocket_cam_settings_desc_6\nORDER BY FOV_DESC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "FOV_DESC"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "Distance_DESC"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "Height_DESC"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "Angle_DESC"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings_desc_6",
+          "timeColumn": "FOV_DESC",
+          "timeColumnType": "int",
+          "where": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Tendance par ordre décroissant",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "datasource": "gamedata",
+      "description": "Tendance de la valeur  à la distance par les joueurs . ",
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 0,
+        "y": 8
+      },
+      "id": 12,
+      "options": {
+        "displayMode": "gradient",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.3",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_FOV,$__interval),\n  sum(A_FOV) AS \"Other\"\nFROM rocket_cam_settings\nWHERE\n  FOV < 110\nGROUP BY 1\nORDER BY $__timeGroup(A_FOV,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_FOV"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Other"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_FOV",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "FOV",
+                "<",
+                "110"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "FOV",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_FOV,$__interval),\n  FOV AS metric,\n  sum(A_FOV) AS \"A_Distance\"\nFROM rocket_cam_settings\nWHERE\n  FOV = 110\nGROUP BY 1,2\nORDER BY $__timeGroup(A_FOV,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_FOV"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_FOV",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "FOV",
+                "=",
+                "110"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "FOV",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "gamedata",
+      "description": "Tendance de la valeur  à la distance par les joueurs . ",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 5,
+        "y": 8
+      },
+      "id": 17,
+      "options": {
+        "displayMode": "gradient",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "from": "",
+                "id": 1,
+                "operator": "",
+                "text": "",
+                "to": "",
+                "type": 2,
+                "value": ""
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "vertical",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.3",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Distance",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Distance,$__interval),\n  Distance AS metric,\n  sum(A_Distance)\nFROM rocket_cam_settings\nWHERE\n  Distance = 260\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Distance,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Distance",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Distance",
+                "=",
+                "260"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Distance",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Distance,$__interval),\n  Distance AS metric,\n  sum(A_Distance)\nFROM rocket_cam_settings\nWHERE\n  Distance = 270\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Distance,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Distance",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Distance",
+                "=",
+                "270"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Distance",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Distance,$__interval),\n  Distance AS metric,\n  sum(A_Distance)\nFROM rocket_cam_settings\nWHERE\n  Distance = 280\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Distance,$__interval)",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Distance",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Distance",
+                "=",
+                "280"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Distance,$__interval),\n  sum(A_Distance) AS \"Other\"\nFROM rocket_cam_settings\nWHERE\n  Distance IN  ( 250 , 300, 240,290,230,330,310,320,220,190 ) \nGROUP BY 1\nORDER BY $__timeGroup(A_Distance,$__interval)",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Other"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Distance",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Distance",
+                "IN ",
+                "( 250 , 300, 240,290,230,330,310,320,220,190 ) "
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Distance",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "gamedata",
+      "description": "Tendance de la valeur  à la distance par les joueurs . ",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "id": 5,
+      "options": {
+        "displayMode": "gradient",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "vertical",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.3",
+      "repeat": null,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Height",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Height,$__interval),\n  Height AS metric,\n  sum(A_Height) AS \"A_Distance\"\nFROM rocket_cam_settings\nWHERE\n  Height = 90\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Height,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Height"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Height",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Height",
+                "=",
+                "90"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Height",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Height,$__interval),\n  Height AS metric,\n  sum(A_Height) AS \"A_Distance\"\nFROM rocket_cam_settings\nWHERE\n  Height = 100\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Height,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Height"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Height",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Height",
+                "=",
+                "100"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Height",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Height,$__interval),\n  Height AS metric,\n  sum(A_Height) AS \"A_Distance\"\nFROM rocket_cam_settings\nWHERE\n  Height = 110\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Height,$__interval)",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Height"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Distance"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Height",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Height",
+                "=",
+                "110"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Height,$__interval),\n  sum(A_Height) AS \"Other\"\nFROM rocket_cam_settings\nWHERE\n  Height IN ( 130 , 120 , 140 , 80 , 150 , 108 ) \nGROUP BY 1\nORDER BY $__timeGroup(A_Height,$__interval)",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Height"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Other"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Height",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Height",
+                "IN",
+                "( 130 , 120 , 140 , 80 , 150 , 108 ) "
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Height",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "gamedata",
+      "description": "Tendance de la valeur  à la distance par les joueurs . ",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "id": 14,
+      "options": {
+        "displayMode": "gradient",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "mappings": [
+              {
+                "from": "",
+                "id": 1,
+                "operator": "",
+                "text": "",
+                "to": "",
+                "type": 2,
+                "value": ""
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "vertical",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.3",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Angle",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Angle,$__interval),\n  Angle AS metric,\n  sum(A_Angle) AS \"A_Angle\"\nFROM rocket_cam_settings\nWHERE\n  Angle = -3\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Angle,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Angle",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Angle",
+                "=",
+                "-3"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "Angle",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Angle,$__interval),\n  Angle AS metric,\n  sum(A_Angle) AS \"A_Angle\"\nFROM rocket_cam_settings\nWHERE\n  Angle = -4\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Angle,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Angle",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Angle",
+                "=",
+                "-4"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "Angle",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Angle,$__interval),\n  Angle AS metric,\n  sum(A_Angle) AS \"A_Angle\"\nFROM rocket_cam_settings\nWHERE\n  Angle = -5\nGROUP BY 1,2\nORDER BY $__timeGroup(A_Angle,$__interval)",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Angle",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Angle",
+                "=",
+                "-5"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(A_Angle,$__interval),\n  sum(A_Angle) AS \"Other\"\nFROM rocket_cam_settings\nWHERE\n  Angle IN (-1 ,-2, -6, -8, -7)\nGROUP BY 1\nORDER BY $__timeGroup(A_Angle,$__interval)",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "A_Angle"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Other"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "A_Angle",
+          "timeColumnType": "float",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "Angle",
+                "IN",
+                "(-1 ,-2, -6, -8, -7)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Angle",
+      "type": "bargauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "gamedata",
+      "description": "Tendance de la valeur  à la distance par les joueurs . ",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 16,
+      "links": [],
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-yellow",
+                  "value": null
+                },
+                {
+                  "color": "semi-dark-yellow",
+                  "value": 5
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 100
+                }
+              ]
+            },
+            "title": "",
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.3",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "Ball_Camera",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(Player,$__interval),\n  Ball_Camera AS metric,\n  count(Player) /4.50 AS \"Ball_Camera\"\nFROM rocket_cam_settings\nGROUP BY 1,2\nORDER BY $__timeGroup(Player,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "Player"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "count"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Ball_Camera"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "rocket_cam_settings",
+          "timeColumn": "Player",
+          "timeColumnType": "varchar",
+          "where": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Ball Cam Switch",
+      "type": "bargauge"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Rocket League DashBoard",
+  "uid": "PDR80ugMz",
+  "variables": {
+    "list": []
+  },
+  "version": 38
+}
