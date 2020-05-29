@@ -10,8 +10,8 @@ html_layout = '''<!DOCTYPE html>
                             <header>
                               <div class="nav-wrapper">
                                 <a href="/">
-                                    <img src="/static/img/logo.png" class="logo" />
-                                    <h1>Gamedata 2</h1>
+                                    <img src="/static/img/favicon.png" class="logo" />
+                                    <h1>Gamedata</h1>
                                   </a>
                                 <nav>
                                 </nav>
