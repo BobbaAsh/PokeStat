@@ -1,13 +1,11 @@
-import numpy as np
 import pandas as pd
 import dash
-import dash_table
 import dash_html_components as html
 import dash_core_components as dcc
 from .layout import html_layout
 import pymysql
 import plotly.graph_objects as go
-import time
+
 db = pymysql.connect("localhost", "root", "password", "gamedata")
 
 def create_dashboard(server):
@@ -27,22 +25,21 @@ def create_dashboard(server):
             id='histogram-graph',
              options=[{'label': i, 'value': i} for i in df['Name']
                       ],
-             
              placeholder="Select Pokemon",
              multi=True,
             clearable=True
         ),
-           html.Button('Submit', id='button', type="submit", n_clicks=0), #create_data_table(df)
+        
+     #create_data_table(df)
     ],
         id='dash-container'
     )
 
     @dash_app.callback(
                     dash.dependencies.Output('dash-container', 'children'),
-                    [dash.dependencies.Input('histogram-graph', 'value')],
-                    [dash.dependencies.State('button', 'n_clicks')])
+                    [dash.dependencies.Input('histogram-graph', 'value')])
     
-    def update_output(n_clicks,value):
+    def update_output(value):
                                          
                                             query = pd.read_sql_query("SELECT * FROM pkmn WHERE Name in {}".format(value).replace("[", "(").replace("]" , ")"), db)
                                             fig = go.Figure(data=[

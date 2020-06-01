@@ -19,34 +19,22 @@ def create_dashboard(server):
     db = pymysql.connect("localhost", "root", "password", "gamedata")
     sql_query_sober = pd.read_sql_query("SELECT * FROM fortnite WHERE mental = 'sober'", db)
     df_sober = pd.DataFrame(sql_query_sober)
-    sql_query_high = pd.read_sql_query("SELECT * FROM fortnite WHERE mental = 'high'", db)
+    sql_query_high = pd.read_sql_query("SELECT * from fortnite WHERE mental ='high'", db)
     df_high = pd.DataFrame(sql_query_high)
     dash_app.index_string = html_layout
-    
+
     dash_app.layout = html.Div([
     dcc.Graph(
         id = 'graph1',
         figure = {
             'data': [
-                { 'x': df_sober["hs"], 'y': df_sober["damage_to_players"], 'type': 'bar' },
+                { 'y': df_sober['hit'], 'x': df_sober['hs'].count(), 'type':'markers', 'marker':{'color':'darkred'},'name':'Sober'}
+                ,{ 'y': df_high['hit'], 'x': df_high['hs'].count(), 'type':'markers', 'marker':{'color':'blue'},'name':'High'}
             ],
                             'layout': {
-            'title': 'Damage Players To Headshot when Players is Sober',
+            'title': 'Headshot', 'barmode':'stack','xaxis':{'title':'Nombre de headshots'},'yaxis':{'title':'Nombre de hits'}
             }
-        }   
-    ),
-    dcc.Graph(
-        id = 'graph2',
-        figure = {
-            'data': [
-                { 'x': df_high["hs"], 'y': df_high["damage_to_players"], 'type': 'bar' },
-            ],
-                            'layout': {
-            'title': 'Damage Players To Headshot when Players is High',
-            }                    
         }
-    ),    
-    ])
-
-
+    )
+   ])
     return dash_app.server
