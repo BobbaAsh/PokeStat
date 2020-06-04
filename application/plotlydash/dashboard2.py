@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import dash
 import dash_table
@@ -15,7 +14,6 @@ def create_dashboard(server):
                                                'https://fonts.googleapis.com/css?family=Lato']
                          )
 
-
     db = pymysql.connect("localhost", "root", "password", "gamedata")
     sql_query_sober = pd.read_sql_query("SELECT * FROM fortnite WHERE mental = 'sober'", db)
     df_sober = pd.DataFrame(sql_query_sober)
@@ -28,11 +26,11 @@ def create_dashboard(server):
         id = 'graph1',
         figure = {
             'data': [
-                { 'y': df_sober['hit'], 'x': df_sober['hs'].count(), 'type':'markers', 'marker':{'color':'darkred'},'name':'Sober'}
-                ,{ 'y': df_high['hit'], 'x': df_high['hs'].count(), 'type':'markers', 'marker':{'color':'blue'},'name':'High'}
+                { 'x': df_sober['hit'], 'y': df_sober['hs'], 'type': 'bar', 'marker':{'color':'darkred'},'name':'SOBER'}
+                ,{ 'x': df_high['hit'], 'y': df_high['hs'], 'type': 'bar', 'marker':{'color':'blue'},'name':'HIGH'}
             ],
                             'layout': {
-            'title': 'Headshot', 'barmode':'stack','xaxis':{'title':'Nombre de headshots'},'yaxis':{'title':'Nombre de hits'}
+            'title': 'COMPARATIF DU NOMBRE DE TIR À LA TÊTE EN FONCTION DE L\'ÉTAT MENTAL SUR 87 JOUEURS','xaxis':{'title':'NOMBRE DE TIRS'},'yaxis':{'title':'NOMBRE DE HEADSHOTS'}
             }
         }
     )
